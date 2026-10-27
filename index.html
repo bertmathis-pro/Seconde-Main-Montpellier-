@@ -1,0 +1,895 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Seconde Pièce : meubles, électroménager, vaisselle et déco de seconde main à Montpellier.">
+<style>
+html{color-scheme:light}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+<title>Seconde Pièce</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Young+Serif&display=swap">
+<style>
+/* Layout : boutique seconde main, scène d'appartement interactive en ouverture, étiquettes de brocante comme signature */
+:root{
+  --bg:#ECEBE1; --surface:#F7F6EF; --raised:#FFFFFA; --ink:#22302A; --muted:#5C6A61; --line:#D3D2C3;
+  --moss:#3E5E49; --on-moss:#F7F6EF; --sage:#86A487; --wood:#A9724A; --sun:#E9B949;
+  --tag:#F3E6CC; --tag-ink:#3A2A1C; --shadow:rgba(34,48,42,.12);
+  --wall:#E2E3D3; --floor:#C9A27A; --floor2:#BE9670; --counter:#7C8F7E;
+  --t-meubles:#DCE3D3; --t-electro:#D7E1E2; --t-vaisselle:#E6DDD0; --t-deco:#E9E0C8;
+  --ok:#3E7A4F; --warn:#A8662B;
+  --f-display:"Young Serif",Georgia,"Times New Roman",serif;
+  --f-body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  --r:14px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#161D19; --surface:#1E2722; --raised:#25302A; --ink:#E9E8DC; --muted:#A3AFA6; --line:#34423A;
+  --moss:#A6C7A2; --on-moss:#14201A; --sage:#7E9C80; --wood:#D49B6E; --sun:#E9B949;
+  --tag:#3B3226; --tag-ink:#F1E3C8; --shadow:rgba(0,0,0,.35);
+  --wall:#26302A; --floor:#5C4632; --floor2:#54402E; --counter:#4E6152;
+  --t-meubles:#26332B; --t-electro:#22313A; --t-vaisselle:#33302A; --t-deco:#35321F;
+  --ok:#8FCB9B; --warn:#E3A86C; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#161D19; --surface:#1E2722; --raised:#25302A; --ink:#E9E8DC; --muted:#A3AFA6; --line:#34423A;
+  --moss:#A6C7A2; --on-moss:#14201A; --sage:#7E9C80; --wood:#D49B6E; --sun:#E9B949;
+  --tag:#3B3226; --tag-ink:#F1E3C8; --shadow:rgba(0,0,0,.35);
+  --wall:#26302A; --floor:#5C4632; --floor2:#54402E; --counter:#4E6152;
+  --t-meubles:#26332B; --t-electro:#22313A; --t-vaisselle:#33302A; --t-deco:#35321F;
+  --ok:#8FCB9B; --warn:#E3A86C; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--surface)}
+a{color:inherit}
+h1,h2,h3{font-family:var(--f-display);font-weight:400;line-height:1.12;text-wrap:balance;margin:0}
+p{margin:0}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--sun);outline-offset:2px;border-radius:6px}
+.wrap{max-width:1180px;margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.eyebrow{font-family:var(--f-mono);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:999px;padding:12px 22px;font-weight:600;cursor:pointer;text-decoration:none;transition:transform .15s,background .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn-primary{background:var(--moss);color:var(--on-moss)}
+.btn-ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.btn[disabled]{opacity:.45;cursor:not-allowed;transform:none}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+/* bandeau + header */
+.promo{background:var(--moss);color:var(--on-moss);font-size:13.5px;font-weight:500}
+.promo .wrap{display:flex;gap:10px 28px;justify-content:center;flex-wrap:wrap;padding-block:8px;text-align:center}
+@media (max-width:640px){.promo span:not(:first-child){display:none}.promo{font-size:12.5px}.scene-hint{font-size:12px;padding:4px 10px;left:10px;top:10px}.hot{width:28px;height:28px;font-size:15px}}
+header.site{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--surface);border-bottom:1px solid var(--line)}
+header.site .wrap{display:flex;align-items:center;gap:20px;padding-block:12px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--f-display);font-size:22px;white-space:nowrap}
+.logo svg{width:34px;height:34px;flex:none}
+nav.main{display:flex;gap:4px;margin-left:auto}
+nav.main a{text-decoration:none;padding:8px 12px;border-radius:999px;font-weight:500;font-size:15px}
+nav.main a:hover{background:var(--bg)}
+nav.main a[aria-current="page"]{background:var(--bg);color:var(--moss);font-weight:600}
+.cart-btn{position:relative;display:flex;align-items:center;gap:8px;background:var(--ink);color:var(--surface);border:0;border-radius:999px;padding:9px 16px;font-weight:600;cursor:pointer}
+.cart-btn svg{width:18px;height:18px}
+.cart-count{min-width:22px;height:22px;border-radius:11px;background:var(--sun);color:#22302A;font-size:12.5px;display:grid;place-items:center;padding:0 6px}
+.menu-btn{display:none;background:none;border:1.5px solid var(--line);border-radius:10px;padding:8px 10px;cursor:pointer}
+@media (max-width:900px){
+  nav.main{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;background:var(--surface);border-bottom:1px solid var(--line);padding:10px max(16px,env(safe-area-inset-right,0px)) 16px max(16px,env(safe-area-inset-left,0px))}
+  nav.main.open{display:flex}
+  nav.main a{padding:12px 14px}
+  .menu-btn{display:block;margin-left:auto}
+  .cart-btn .lbl{display:none}
+}
+
+/* hero */
+.hero{padding-block:44px 0}
+.hero-top{display:grid;grid-template-columns:1.25fr 1fr;gap:28px 48px;align-items:end}
+.hero h1{font-size:clamp(38px,6.2vw,74px);letter-spacing:-.01em}
+.hero h1 em{font-style:normal;color:var(--moss);position:relative;white-space:nowrap}
+.hero h1 em::after{content:"";position:absolute;left:0;right:0;bottom:.04em;height:.14em;background:var(--sun);opacity:.55;z-index:-1;border-radius:4px}
+.hero-lead{font-size:18px;color:var(--muted);max-width:46ch}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+.hero-facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.chip{font-size:13.5px;padding:6px 12px;border-radius:999px;background:var(--surface);border:1px solid var(--line);font-weight:500}
+@media (max-width:820px){.hero-top{grid-template-columns:1fr}}
+.scene-box{position:relative;margin-top:34px;border-radius:24px;overflow:hidden;border:1px solid var(--line);background:var(--wall);max-width:100%}
+.scene-box svg.scene{display:block;width:100%;height:auto}
+.scene-hint{position:absolute;left:16px;top:14px;background:var(--surface);border-radius:999px;padding:6px 14px;font-size:13.5px;font-weight:600;box-shadow:0 4px 14px var(--shadow);display:flex;align-items:center;gap:8px}
+.scene-hint i{width:9px;height:9px;border-radius:50%;background:var(--sun);display:block;animation:pulse 1.8s infinite}
+.hot{position:absolute;transform:translate(-50%,-50%);width:34px;height:34px;border-radius:50%;border:0;background:var(--sun);color:#22302A;cursor:pointer;display:grid;place-items:center;font-weight:700;font-size:18px;box-shadow:0 0 0 4px rgba(233,185,73,.35)}
+.hot::before{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px solid var(--sun);animation:ring 2.2s infinite}
+.hot .tip{position:absolute;bottom:calc(100% + 12px);left:50%;transform:translateX(-50%) translateY(4px) rotate(-3deg);background:var(--tag);color:var(--tag-ink);font-family:var(--f-mono);font-size:12.5px;font-weight:500;white-space:nowrap;padding:7px 12px 7px 22px;border-radius:4px 10px 10px 4px;box-shadow:0 6px 16px var(--shadow);opacity:0;pointer-events:none;transition:.2s}
+.hot .tip::before{content:"";position:absolute;left:8px;top:50%;width:7px;height:7px;margin-top:-3.5px;border-radius:50%;background:var(--bg);box-shadow:inset 0 0 0 1px var(--tag-ink)}
+.hot:hover .tip,.hot:focus-visible .tip{opacity:1;transform:translateX(-50%) translateY(0) rotate(-3deg)}
+@keyframes ring{0%{transform:scale(.8);opacity:.9}100%{transform:scale(1.7);opacity:0}}
+@keyframes pulse{50%{opacity:.35}}
+.sunrays{transform-box:fill-box;transform-origin:center;animation:spin 40s linear infinite}
+.leaf{transform-box:fill-box;transform-origin:bottom center;animation:sway 5s ease-in-out infinite alternate}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes sway{from{transform:rotate(-3deg)}to{transform:rotate(3deg)}}
+.rise{animation:rise .7s cubic-bezier(.2,.7,.2,1) both}
+.rise.d2{animation-delay:.08s}.rise.d3{animation-delay:.16s}
+@keyframes rise{from{transform:translateY(14px);opacity:.3}}
+
+/* sections */
+section.block{padding-block:72px 0}
+.head-row{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:26px}
+.head-row h2{font-size:clamp(28px,3.6vw,42px)}
+.link-more{font-weight:600;color:var(--moss);text-decoration:none;white-space:nowrap}
+.link-more:hover{text-decoration:underline}
+.promises{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+.promise{display:flex;gap:14px;align-items:flex-start;padding:18px 0;border-top:2px solid var(--ink)}
+.promise svg{width:38px;height:38px;flex:none;color:var(--moss)}
+.promise b{display:block;font-size:17px}
+.promise span{color:var(--muted);font-size:14.5px}
+@media (max-width:760px){.promises{grid-template-columns:1fr}}
+
+/* cartes produits */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(238px,1fr));gap:22px}
+.card{display:flex;flex-direction:column;min-width:0}
+.card-art{position:relative;display:block;aspect-ratio:5/4;border-radius:var(--r);background:var(--tint);overflow:hidden;color:var(--ink);max-width:100%}
+.card-art svg.art{position:absolute;inset:12% 8% 4%;width:84%;height:84%;transition:transform .35s}
+.card:hover .card-art svg.art{transform:scale(1.05) rotate(-1deg)}
+.tag{position:absolute;top:14px;right:14px;background:var(--tag);color:var(--tag-ink);font-family:var(--f-mono);font-weight:500;font-size:14.5px;padding:6px 12px 6px 24px;border-radius:4px 10px 10px 4px;transform:rotate(4deg);box-shadow:0 3px 10px var(--shadow)}
+.tag::before{content:"";position:absolute;left:9px;top:50%;width:7px;height:7px;margin-top:-3.5px;border-radius:50%;background:var(--tint,var(--bg));box-shadow:inset 0 0 0 1px var(--tag-ink)}
+.badge-new,.badge-sold{position:absolute;left:12px;top:12px;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:4px 10px;border-radius:999px}
+.badge-new{background:var(--moss);color:var(--on-moss)}
+.badge-sold{background:var(--ink);color:var(--surface)}
+.card.is-sold .card-art svg{opacity:.4;filter:grayscale(1)}
+.card-body{padding:12px 2px 0;display:flex;flex-direction:column;gap:4px;flex:1}
+.card-meta{font-size:13px;color:var(--muted)}
+.card h3{font-family:var(--f-body);font-weight:600;font-size:16.5px;line-height:1.3}
+.card h3 a{text-decoration:none}
+.card h3 a:hover{text-decoration:underline}
+.dims{font-family:var(--f-mono);font-size:12.5px;color:var(--muted)}
+.card-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:auto;padding-top:8px}
+.state{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:500}
+.state i{display:inline-flex;gap:3px}
+.state i b{width:7px;height:7px;border-radius:50%;background:var(--line)}
+.state i b.on{background:var(--ok)}
+.btn-add{border:1.5px solid var(--ink);background:transparent;border-radius:999px;padding:6px 14px;font-weight:600;font-size:14px;cursor:pointer}
+.btn-add:hover{background:var(--ink);color:var(--surface)}
+.btn-add.in{background:var(--moss);border-color:var(--moss);color:var(--on-moss)}
+
+/* catégories */
+.cats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.cat{position:relative;display:flex;flex-direction:column;justify-content:space-between;min-height:220px;padding:18px;border-radius:var(--r);background:var(--tint);text-decoration:none;overflow:hidden;color:var(--ink)}
+.cat h3{font-size:24px;position:relative;z-index:1}
+.cat span{font-size:14px;color:var(--muted);position:relative;z-index:1}
+.cat svg{position:absolute;right:-12px;bottom:-6px;width:70%;transition:transform .35s}
+.cat:hover svg{transform:translateY(-6px) rotate(-3deg)}
+@media (max-width:900px){.cats{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:460px){.cats{grid-template-columns:1fr}.cat{min-height:170px}}
+
+/* étapes */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;counter-reset:s}
+.step{background:var(--surface);border-radius:var(--r);padding:22px;border:1px solid var(--line)}
+.step .n{font-family:var(--f-display);font-size:42px;color:var(--wood);line-height:1}
+.step h3{font-size:22px;margin:10px 0 6px}
+.step p{color:var(--muted)}
+@media (max-width:820px){.steps{grid-template-columns:1fr}}
+.sell-band{margin-top:22px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:22px 24px;border-radius:var(--r);background:var(--moss);color:var(--on-moss)}
+.sell-band h3{font-size:24px}
+.sell-band .btn{background:var(--on-moss);color:var(--moss)}
+
+/* avis */
+.reviews{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px}
+.review{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px;display:flex;flex-direction:column;gap:10px}
+.stars{color:var(--sun);letter-spacing:2px;font-size:17px}
+.review footer{font-size:13.5px;color:var(--muted);margin-top:auto}
+.note-demo{font-size:13px;color:var(--muted);font-style:italic}
+
+/* boutique */
+.page-head{padding-block:40px 24px}
+.page-head h1{font-size:clamp(34px,5vw,56px)}
+.page-head p{color:var(--muted);margin-top:8px;max-width:60ch}
+.shop{display:grid;grid-template-columns:250px 1fr;gap:32px;align-items:start}
+.filters{position:sticky;top:calc(env(safe-area-inset-top,0px) + 84px);display:flex;flex-direction:column;gap:22px}
+.filters fieldset{border:0;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.filters legend{font-weight:700;margin-bottom:8px;font-size:14.5px}
+.pills{display:flex;flex-wrap:wrap;gap:6px}
+.pill{border:1.5px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px;font-size:14px;cursor:pointer;font-weight:500}
+.pill[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--surface)}
+input[type=range]{width:100%;accent-color:var(--moss)}
+.range-val{font-family:var(--f-mono);font-size:14px}
+.toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.toolbar select{padding:8px 12px;border-radius:10px;border:1.5px solid var(--line);background:var(--surface)}
+.count{color:var(--muted);font-size:14.5px}
+.empty{padding:40px;text-align:center;border:1.5px dashed var(--line);border-radius:var(--r);color:var(--muted)}
+.filters-toggle{display:none}
+@media (max-width:860px){
+  .shop{grid-template-columns:1fr}
+  .filters{position:static;display:none;background:var(--surface);padding:16px;border-radius:var(--r);border:1px solid var(--line)}
+  .filters.open{display:flex}
+  .filters-toggle{display:inline-flex}
+}
+
+/* fiche produit */
+.crumbs{font-size:14px;color:var(--muted);padding-top:26px}
+.crumbs a{color:var(--muted)}
+.product{display:grid;grid-template-columns:1.1fr 1fr;gap:44px;padding-top:18px;align-items:start}
+.gallery-main{position:relative;aspect-ratio:1/1;border-radius:20px;background:var(--tint);overflow:hidden;color:var(--ink);max-width:100%}
+.gallery-main svg.art{position:absolute;inset:10%;width:80%;height:80%;transition:transform .45s}
+.gallery-main .tag{font-size:17px;top:20px;right:20px}
+.thumbs{display:flex;gap:10px;margin-top:12px}
+.thumb{width:76px;aspect-ratio:1;border-radius:12px;background:var(--tint);border:2px solid transparent;overflow:hidden;cursor:pointer;padding:0;position:relative;color:var(--ink)}
+.thumb svg{position:absolute;inset:10%;width:80%;height:80%}
+.thumb[aria-pressed="true"]{border-color:var(--ink)}
+.view-1{transform:scaleX(-1)}
+.view-2{transform:scale(1.9) translateY(4%)}
+.p-info h1{font-size:clamp(30px,4vw,46px);margin:6px 0 12px}
+.p-price{font-family:var(--f-mono);font-size:28px;font-weight:500}
+.p-desc{color:var(--muted);margin-top:14px;max-width:56ch}
+.spec{margin-top:20px;border-top:1px solid var(--line)}
+.spec div{display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-bottom:1px solid var(--line);font-size:15px}
+.spec dt{color:var(--muted)}
+.spec dd{margin:0;font-family:var(--f-mono);font-size:14px;text-align:right}
+.state-meter{display:flex;gap:6px;margin-top:4px}
+.state-meter span{flex:1;font-size:12.5px;text-align:center;padding:6px 4px;border-radius:8px;background:var(--surface);border:1px solid var(--line);color:var(--muted)}
+.state-meter span.on{background:var(--moss);color:var(--on-moss);border-color:var(--moss);font-weight:600}
+.guarantee{display:flex;gap:12px;align-items:center;margin-top:18px;padding:14px 16px;border-radius:12px;background:var(--t-electro)}
+.guarantee svg{width:30px;height:30px;flex:none;color:var(--moss)}
+.p-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+.p-actions .btn{flex:1;min-width:200px}
+.impact{margin-top:16px;font-size:14.5px;color:var(--muted);display:flex;gap:8px;align-items:center}
+.impact b{color:var(--ok)}
+.p-delivery{margin-top:18px;display:grid;gap:8px;font-size:14.5px}
+.p-delivery div{display:flex;gap:10px}
+@media (max-width:860px){.product{grid-template-columns:1fr;gap:24px}}
+
+/* formulaires */
+.form{display:grid;gap:16px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.row3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media (max-width:560px){.row2{grid-template-columns:1fr}}
+.field{display:flex;flex-direction:column;gap:6px;min-width:0}
+.field label,.field .lab{font-weight:600;font-size:14.5px}
+.field small{color:var(--muted);font-size:13px}
+.field input,.field select,.field textarea{width:100%;padding:11px 13px;border-radius:10px;border:1.5px solid var(--line);background:var(--raised)}
+.field textarea{min-height:110px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--moss);outline:none;box-shadow:0 0 0 3px color-mix(in srgb,var(--moss) 25%,transparent)}
+.radios{display:flex;flex-wrap:wrap;gap:8px}
+.radios label{display:flex;align-items:center;gap:8px;padding:9px 14px;border:1.5px solid var(--line);border-radius:10px;cursor:pointer;font-weight:500;font-size:14.5px;background:var(--raised)}
+.radios label:has(input:checked){border-color:var(--moss);background:color-mix(in srgb,var(--moss) 12%,var(--raised))}
+.radios input{accent-color:var(--moss)}
+.drop{border:2px dashed var(--line);border-radius:var(--r);padding:22px;text-align:center;cursor:pointer;background:var(--raised);transition:.2s}
+.drop.over{border-color:var(--moss);background:color-mix(in srgb,var(--moss) 10%,var(--raised))}
+.previews{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+.previews figure{margin:0;position:relative;width:86px;height:86px;border-radius:10px;overflow:hidden;background:var(--surface)}
+.previews img{width:100%;height:100%;object-fit:cover}
+.previews button{position:absolute;top:4px;right:4px;width:22px;height:22px;border-radius:50%;border:0;background:var(--ink);color:var(--surface);cursor:pointer;font-size:13px;line-height:1}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--muted)}
+.check input{margin-top:3px;accent-color:var(--moss)}
+.err{color:var(--warn);font-size:13.5px;font-weight:500}
+.sell-layout{display:grid;grid-template-columns:1fr 1.35fr;gap:40px;align-items:start}
+.sell-aside{display:flex;flex-direction:column;gap:18px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px}
+.panel h3{font-size:22px;margin-bottom:12px}
+.tl{display:grid;gap:14px;margin:0;padding:0;list-style:none}
+.tl li{display:grid;grid-template-columns:30px 1fr;gap:10px}
+.tl li b{width:30px;height:30px;border-radius:50%;background:var(--moss);color:var(--on-moss);display:grid;place-items:center;font-size:14px}
+.tl li span{color:var(--muted);font-size:14.5px}
+.tl li strong{display:block;color:var(--ink)}
+.yesno{display:grid;grid-template-columns:1fr 1fr;gap:14px;font-size:14.5px}
+.yesno ul{margin:6px 0 0;padding-left:18px;color:var(--muted)}
+@media (max-width:860px){.sell-layout{grid-template-columns:1fr}}
+.success{text-align:center;padding:34px 22px}
+.success svg{width:62px;height:62px;color:var(--ok)}
+.success h3{font-size:28px;margin:10px 0 8px}
+.success p{color:var(--muted);max-width:46ch;margin-inline:auto}
+
+/* FAQ */
+.faq-layout{display:grid;grid-template-columns:220px 1fr;gap:40px;align-items:start}
+.faq-nav{position:sticky;top:calc(env(safe-area-inset-top,0px) + 90px);display:flex;flex-direction:column;gap:4px}
+.faq-nav a{text-decoration:none;padding:8px 12px;border-radius:10px;color:var(--muted);font-weight:500}
+.faq-nav a:hover{background:var(--surface);color:var(--ink)}
+.faq-group{margin-bottom:34px;scroll-margin-top:110px}
+.faq-group h2{font-size:28px;margin-bottom:12px}
+details.qa{border-bottom:1px solid var(--line)}
+details.qa summary{cursor:pointer;list-style:none;padding:16px 36px 16px 0;font-weight:600;font-size:16.5px;position:relative}
+details.qa summary::-webkit-details-marker{display:none}
+details.qa summary::after{content:"+";position:absolute;right:6px;top:12px;font-size:24px;font-weight:400;transition:transform .2s;color:var(--moss)}
+details.qa[open] summary::after{transform:rotate(45deg)}
+details.qa p{padding:0 0 18px;color:var(--muted);max-width:66ch}
+@media (max-width:820px){.faq-layout{grid-template-columns:1fr}.faq-nav{position:static;flex-direction:row;flex-wrap:wrap}}
+
+/* à propos */
+.about{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
+.about p{color:var(--muted);margin-top:14px;font-size:17px;max-width:56ch}
+.about-art{border-radius:24px;overflow:hidden;background:var(--t-meubles);color:var(--ink);max-width:100%}
+.about-art svg{display:block;width:100%;height:auto}
+.values{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.value{padding:20px 0;border-top:2px solid var(--ink)}
+.value h3{font-size:22px;margin-bottom:8px}
+.value p{color:var(--muted)}
+@media (max-width:820px){.about,.values{grid-template-columns:1fr}}
+
+/* contact */
+.contact{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:start}
+.info-list{display:grid;gap:14px}
+.info-list div{display:grid;grid-template-columns:110px 1fr;gap:12px;font-size:15px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.info-list dt{color:var(--muted)}
+.info-list dd{margin:0;font-weight:500}
+.map{margin-top:20px;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);background:var(--surface);color:var(--ink);max-width:100%}
+.map svg{display:block;width:100%;height:auto}
+.zone-check{display:flex;gap:8px;margin-top:10px}
+.zone-check input{flex:1;min-width:0}
+.zone-res{margin-top:8px;font-size:14.5px;font-weight:500;min-height:1.5em}
+.zone-res.ok{color:var(--ok)}.zone-res.no{color:var(--warn)}
+@media (max-width:860px){.contact{grid-template-columns:1fr}}
+
+/* footer */
+footer.site{margin-top:90px;background:var(--ink);color:var(--surface)}
+footer.site .wrap{padding-block:56px 30px}
+.foot-top{display:grid;grid-template-columns:1.2fr 1fr;gap:44px}
+footer.site h2{font-size:30px}
+footer.site p.muted{color:color-mix(in srgb,var(--surface) 70%,var(--ink));margin-top:8px}
+.news{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
+.news input{flex:1;min-width:200px;padding:12px 16px;border-radius:999px;border:0;background:var(--surface);color:var(--ink)}
+.news .btn{background:var(--sun);color:#22302A}
+.news-msg{margin-top:10px;font-size:14px;min-height:1.4em;color:var(--sun)}
+.insta-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.insta-head span{font-family:var(--f-mono);font-size:13.5px}
+.insta{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+.insta a{position:relative;aspect-ratio:1;border-radius:10px;background:var(--tint);overflow:hidden;display:block;color:var(--ink);max-width:100%}
+.insta a svg{position:absolute;inset:12%;width:76%;height:76%;transition:transform .3s}
+.insta a:hover svg{transform:scale(1.1)}
+.insta small{display:block;margin-top:8px;font-size:12.5px;color:color-mix(in srgb,var(--surface) 60%,var(--ink))}
+.foot-links{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:44px;padding-top:22px;border-top:1px solid color-mix(in srgb,var(--surface) 20%,var(--ink));font-size:14px}
+.foot-links a{text-decoration:none;color:color-mix(in srgb,var(--surface) 80%,var(--ink))}
+.foot-links a:hover{color:var(--surface)}
+.demo-note{margin-top:14px;font-size:12.5px;color:color-mix(in srgb,var(--surface) 55%,var(--ink))}
+@media (max-width:820px){.foot-top{grid-template-columns:1fr}}
+
+/* panier */
+.overlay{position:fixed;inset:0;background:rgba(10,16,12,.45);z-index:80;opacity:0;pointer-events:none;transition:opacity .25s}
+.overlay.open{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(440px,100%);background:var(--surface);z-index:90;transform:translateX(105%);transition:transform .3s cubic-bezier(.2,.7,.2,1);display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);padding-right:env(safe-area-inset-right,0px);box-shadow:-10px 0 40px var(--shadow)}
+.drawer.open{transform:none}
+.dr-head{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:1px solid var(--line)}
+.dr-head h2{font-size:24px}
+.x{background:none;border:0;font-size:26px;cursor:pointer;width:40px;height:40px;border-radius:50%;line-height:1}
+.x:hover{background:var(--bg)}
+.dr-steps{display:flex;gap:6px;padding:12px 20px 0}
+.dr-steps span{flex:1;height:4px;border-radius:2px;background:var(--line)}
+.dr-steps span.on{background:var(--moss)}
+.dr-body{flex:1;overflow-y:auto;padding:16px 20px}
+.dr-foot{padding:16px 20px;border-top:1px solid var(--line);display:grid;gap:10px}
+.line{display:grid;grid-template-columns:64px 1fr auto;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.line .mini{width:64px;height:64px;border-radius:10px;background:var(--tint);position:relative;color:var(--ink)}
+.line .mini svg{position:absolute;inset:8%;width:84%;height:84%}
+.line b{display:block;font-weight:600;font-size:14.5px;line-height:1.3}
+.line small{color:var(--muted);font-size:12.5px}
+.line .pr{font-family:var(--f-mono);font-size:14.5px;text-align:right}
+.line button{background:none;border:0;color:var(--muted);font-size:12.5px;cursor:pointer;text-decoration:underline;padding:0;margin-top:2px}
+.tot{display:flex;justify-content:space-between;font-size:15px}
+.tot.big{font-size:18px;font-weight:700}
+.tot span:last-child{font-family:var(--f-mono)}
+.free{background:var(--bg);border-radius:12px;padding:12px 14px;font-size:14px}
+.free .bar{height:6px;border-radius:3px;background:var(--line);margin-top:8px;overflow:hidden}
+.free .bar i{display:block;height:100%;background:var(--moss);transition:width .4s}
+.eco{font-size:13.5px;color:var(--ok);font-weight:500}
+.pay-opt{display:grid;gap:8px}
+.demo-box{font-size:13px;background:var(--tag);color:var(--tag-ink);border-radius:10px;padding:10px 12px}
+
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translate(-50%,140%);background:var(--ink);color:var(--surface);padding:12px 20px;border-radius:999px;font-weight:600;z-index:100;transition:transform .3s;max-width:calc(100% - 32px);text-align:center}
+.toast.show{transform:translate(-50%,0)}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
+</style>
+</head>
+<body>
+<div class="promo"><div class="wrap"><span>Livraison offerte dès 150 € sur Montpellier et sa métropole</span><span>Électroménager testé et garanti 3 mois</span><span>Retrait gratuit en magasin</span></div></div>
+
+<header class="site">
+  <div class="wrap">
+    <a href="#accueil" class="logo" aria-label="Seconde Pièce, accueil">
+      <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="19" fill="var(--moss)"/><path d="M11 25h18M13 25v-6a7 7 0 0 1 14 0v6M15 25v4M25 25v4" stroke="var(--on-moss)" stroke-width="2.4" fill="none" stroke-linecap="round"/><path d="M20 8c3 2 3 5 0 7c-3-2-3-5 0-7z" fill="var(--sun)"/></svg>
+      Seconde Pièce
+    </a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mainNav">Menu</button>
+    <nav class="main" id="mainNav" aria-label="Navigation principale">
+      <a href="#boutique" data-r="boutique">Boutique</a>
+      <a href="#vendre" data-r="vendre">Vendre vos objets</a>
+      <a href="#avis" data-r="avis">Avis</a>
+      <a href="#apropos" data-r="apropos">À propos</a>
+      <a href="#faq" data-r="faq">FAQ</a>
+      <a href="#contact" data-r="contact">Contact</a>
+    </nav>
+    <button class="cart-btn" id="cartBtn" aria-label="Ouvrir le panier">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1.4 11.2a2 2 0 0 1-2 1.8H8.4a2 2 0 0 1-2-1.8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+      <span class="lbl">Panier</span><span class="cart-count" id="cartCount">0</span>
+    </button>
+  </div>
+</header>
+
+<main id="app"></main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-top">
+      <div>
+        <h2>La lettre de Seconde Pièce</h2>
+        <p class="muted">Les nouveaux arrivages chaque vendredi, avant tout le monde. Un e-mail par semaine, pas plus.</p>
+        <form class="news" id="newsForm" novalidate>
+          <label for="newsMail" class="sr">Votre adresse e-mail</label>
+          <input id="newsMail" type="email" placeholder="vous@exemple.fr" autocomplete="email">
+          <button class="btn" type="submit">Je m'inscris</button>
+        </form>
+        <p class="news-msg" id="newsMsg" role="status"></p>
+      </div>
+      <div>
+        <div class="insta-head"><h2>Sur Instagram</h2><span>@secondepiece.mtp</span></div>
+        <div class="insta" id="insta"></div>
+        <small>Aperçu : le vrai fil Instagram s'affichera ici une fois le compte relié.</small>
+      </div>
+    </div>
+    <div class="foot-links">
+      <a href="#boutique">Boutique</a><a href="#vendre">Vendre vos objets</a><a href="#faq">Livraison et retrait</a><a href="#faq">Garantie</a><a href="#contact">Contact</a><a href="#apropos">À propos</a><span>Mentions légales · CGV · Confidentialité (à compléter)</span>
+    </div>
+    <p class="demo-note">Maquette de démonstration : nom provisoire, paiements, envois de formulaires et avis sont simulés.</p>
+  </div>
+</footer>
+
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="drawer" aria-label="Panier" aria-hidden="true">
+  <div class="dr-head"><h2 id="drTitle">Votre panier</h2><button class="x" id="drClose" aria-label="Fermer le panier">×</button></div>
+  <div class="dr-steps" id="drSteps"></div>
+  <div class="dr-body" id="drBody"></div>
+  <div class="dr-foot" id="drFoot"></div>
+</aside>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(function(){
+"use strict";
+/* ---------- illustrations ---------- */
+const ART={
+sofa:c=>`<rect x="34" y="52" width="132" height="44" rx="12" fill="${c}"/><rect x="24" y="86" width="152" height="34" rx="8" fill="${c}"/><rect x="16" y="70" width="26" height="52" rx="11" fill="${c}"/><rect x="158" y="70" width="26" height="52" rx="11" fill="${c}"/><path d="M100 90v28M78 58v26M122 58v26" opacity=".45"/><path d="M34 122l-3 16M166 122l3 16"/>`,
+armchair:c=>`<path d="M58 44q42-16 84 0v50H58z" fill="${c}"/><rect x="48" y="84" width="104" height="30" rx="9" fill="${c}"/><rect x="40" y="66" width="22" height="50" rx="10" fill="${c}"/><rect x="138" y="66" width="22" height="50" rx="10" fill="${c}"/><path d="M56 116l-9 24M144 116l9 24"/><path d="M100 50v30" opacity=".4"/>`,
+table:c=>`<rect x="18" y="56" width="164" height="12" rx="3" fill="${c}"/><rect x="30" y="68" width="140" height="10" fill="${c}"/><rect x="26" y="68" width="11" height="70" fill="${c}"/><rect x="163" y="68" width="11" height="70" fill="${c}"/><path d="M30 62h140" opacity=".35"/>`,
+chair:c=>`<path d="M72 92V36q28-14 56 0v56" fill="none"/><path d="M78 48h44M78 62h44" opacity=".7"/><ellipse cx="100" cy="92" rx="38" ry="10" fill="${c}"/><path d="M68 96l-8 44M132 96l8 44M88 100l-3 38M112 100l3 38"/><ellipse cx="100" cy="122" rx="30" ry="6"/>`,
+dresser:c=>`<rect x="34" y="34" width="132" height="8" rx="2" fill="${c}"/><rect x="40" y="42" width="120" height="86" rx="3" fill="${c}"/><path d="M40 70h120M40 99h120"/><circle cx="100" cy="56" r="3.5" fill="currentColor"/><circle cx="100" cy="85" r="3.5" fill="currentColor"/><circle cx="100" cy="114" r="3.5" fill="currentColor"/><path d="M48 128v10M152 128v10"/>`,
+shelf:c=>`<path d="M52 16v122M148 16v122"/><rect x="40" y="38" width="120" height="7" rx="2" fill="${c}"/><rect x="40" y="76" width="120" height="7" rx="2" fill="${c}"/><rect x="40" y="114" width="120" height="7" rx="2" fill="${c}"/><rect x="60" y="16" width="10" height="22" fill="#7FA6B8"/><rect x="72" y="20" width="9" height="18" fill="#C4553C"/><rect x="83" y="14" width="10" height="24" fill="#D9A441"/><path d="M118 60h22l-3 16h-16z" fill="#C9A27A"/><path d="M129 60q-8-14 2-22q6 10-2 22" fill="#86A487"/><rect x="62" y="96" width="34" height="18" rx="2" fill="#E6DDD0"/>`,
+desk:c=>`<rect x="20" y="58" width="160" height="10" rx="3" fill="${c}"/><rect x="112" y="68" width="58" height="28" rx="3" fill="${c}"/><path d="M128 82h26"/><path d="M34 68l-8 70M50 68l4 70M170 96l6 42M150 96l-4 42"/><rect x="40" y="36" width="40" height="22" rx="3" fill="#E6DDD0"/><path d="M60 58v-6"/>`,
+bedside:c=>`<rect x="56" y="50" width="88" height="8" rx="3" fill="${c}"/><rect x="62" y="58" width="76" height="58" rx="5" fill="${c}"/><path d="M70 66l16 42M86 66l16 42M102 66l16 42M118 66l14 36M70 108l16-42M86 108l16-42M102 108l16-42M118 108l14-36" opacity=".38"/><path d="M68 116v24M132 116v24"/><path d="M88 50v-14h24v14" fill="#F3E6CC"/>`,
+fridge:c=>`<rect x="62" y="10" width="76" height="130" rx="8" fill="${c}"/><path d="M62 56h76"/><path d="M126 24v20M126 68v30" stroke-width="5"/>`,
+washer:c=>`<rect x="52" y="36" width="96" height="104" rx="6" fill="${c}"/><path d="M52 58h96"/><circle cx="100" cy="100" r="28" fill="#CFE0DD"/><circle cx="100" cy="100" r="19"/><circle cx="66" cy="47" r="4"/><rect x="110" y="43" width="28" height="8" rx="2"/>`,
+microwave:c=>`<rect x="30" y="62" width="140" height="76" rx="8" fill="${c}"/><rect x="42" y="74" width="92" height="52" rx="4" fill="#2C3A33"/><path d="M54 84l14-6M54 96l26-12" stroke="#9FB3AA" opacity=".7"/><circle cx="152" cy="84" r="5"/><circle cx="152" cy="104" r="5"/><path d="M146 120h12"/>`,
+kettle:c=>`<path d="M68 62h64l10 74H58z" fill="${c}"/><path d="M132 72q28 2 22 32q-4 18-16 22" /><path d="M68 66q-22-10-30-30" /><rect x="84" y="50" width="32" height="12" rx="4" fill="${c}"/><path d="M60 118h80" opacity=".4"/>`,
+plates:c=>`<ellipse cx="100" cy="124" rx="70" ry="14" fill="${c}"/><ellipse cx="100" cy="114" rx="70" ry="14" fill="${c}"/><ellipse cx="100" cy="104" rx="70" ry="14" fill="#F4F2EA"/><ellipse cx="100" cy="104" rx="50" ry="9" stroke="${c}" stroke-dasharray="4 5"/><path d="M68 60h64q-4 32-32 32t-32-32z" fill="${c}"/><ellipse cx="100" cy="60" rx="32" ry="7" fill="#F4F2EA"/>`,
+glasses:c=>[58,100,142].map(x=>`<path d="M${x-17} 36h34q0 42-17 48q-17-6-17-48z" fill="${c}"/><path d="M${x-13} 50h26" stroke="#fff" opacity=".6"/><path d="M${x} 84v42M${x-15} 128h30"/>`).join(""),
+cocotte:c=>`<path d="M44 76h112v38q0 22-22 22H66q-22 0-22-22z" fill="${c}"/><rect x="38" y="62" width="124" height="16" rx="8" fill="${c}"/><path d="M38 96h-14M162 96h14" stroke-width="8"/><rect x="88" y="48" width="24" height="14" rx="5" fill="#2C3A33"/>`,
+lamp:c=>`<path d="M144 64l-16 42h60l-16-42z" fill="#F6D77A" fill-opacity=".38" stroke="none"/><path d="M60 136V64q0-50 62-50q34 0 42 30" stroke="${c}" stroke-width="6"/><path d="M146 46h36l-6 18h-24z" fill="${c}"/><ellipse cx="60" cy="138" rx="24" ry="5" fill="${c}"/>`,
+mirror:c=>`<circle cx="100" cy="76" r="60" fill="${c}"/><circle cx="100" cy="76" r="50" stroke-dasharray="3 5" opacity=".55"/><circle cx="100" cy="76" r="40" fill="#DCE8E5"/><path d="M80 62l16-16M84 84l30-30" stroke="#fff" stroke-width="4" opacity=".8"/>`,
+pendant:c=>`<path d="M100 2v40"/><ellipse cx="100" cy="100" rx="26" ry="7" fill="#F6D77A" stroke="none"/><path d="M58 96q0-54 42-54t42 54z" fill="${c}"/><path d="M58 96h84"/><path d="M68 74h64M63 86h74M80 56h40" opacity=".45"/>`,
+plant:c=>`<path d="M78 104h44l-6 36H84z" fill="#C9A27A"/><g class="leaf"><path d="M100 104q-30-30-22-70q20 30 22 70" fill="${c}"/><path d="M100 104q28-36 10-74q-14 34-10 74" fill="${c}"/><path d="M100 104q-44-6-56-36q36 4 56 36" fill="${c}"/></g>`
+};
+function art(kind,color,cls){return `<svg viewBox="0 0 200 160" class="art ${cls||""}" aria-hidden="true"><ellipse cx="100" cy="146" rx="76" ry="6" style="fill:var(--shadow)"/><g fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">${ART[kind](color)}</g></svg>`;}
+function inner(kind,color,x,y,s){return `<svg x="${x}" y="${y}" width="${200*s}" height="${160*s}" viewBox="0 0 200 160" overflow="visible"><g fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">${ART[kind](color)}</g></svg>`;}
+
+/* ---------- données ---------- */
+const CATS=[
+ {k:"Meubles",label:"Meubles",tint:"var(--t-meubles)",kind:"armchair",color:"#D9A441",blurb:"Canapés, tables, rangements"},
+ {k:"Électroménager",label:"Électroménager",tint:"var(--t-electro)",kind:"washer",color:"#EEF0EE",blurb:"Testé et garanti 3 mois"},
+ {k:"Vaisselle",label:"Vaisselle et cuisine",tint:"var(--t-vaisselle)",kind:"cocotte",color:"#C4553C",blurb:"Services, verres, ustensiles"},
+ {k:"Déco",label:"Déco et luminaires",tint:"var(--t-deco)",kind:"pendant",color:"#D2B07A",blurb:"Lampes, miroirs, suspensions"}];
+const ROOMS=["Salon","Cuisine","Chambre","Salle de bain","Bureau"];
+const STATES=["Bon état","Très bon état","Comme neuf"];
+const P=[
+ {id:1,name:"Canapé 3 places en velours vert sauge",cat:"Meubles",room:"Salon",price:180,state:"Très bon état",dims:"L 198 × P 88 × H 82 cm",kind:"sofa",color:"#8FAA8B",kg:45,added:"2026-10-19",desc:"Velours côtelé doux, assise ferme, coussins déhoussables lavés par nos soins. Aucune tache, très légère trace d'usure sur l'accoudoir gauche."},
+ {id:2,name:"Fauteuil cocktail moutarde années 60",cat:"Meubles",room:"Salon",price:95,state:"Bon état",dims:"L 68 × P 70 × H 78 cm",kind:"armchair",color:"#D9A441",kg:18,added:"2026-10-18",desc:"Pieds compas en hêtre, tissu d'origine retendu. Une pièce vintage qui réchauffe un coin lecture."},
+ {id:3,name:"Table de ferme en chêne massif",cat:"Meubles",room:"Cuisine",price:220,state:"Très bon état",dims:"L 180 × P 85 × H 76 cm",kind:"table",color:"#B98352",kg:60,added:"2026-10-12",desc:"Plateau poncé et huilé, 6 à 8 couverts. Bois patiné, solide comme au premier jour."},
+ {id:4,name:"Lot de 4 chaises bistrot",cat:"Meubles",room:"Cuisine",price:120,state:"Bon état",dims:"H 84 cm · assise H 45 cm",kind:"chair",color:"#6B4A33",kg:16,added:"2026-10-09",desc:"Bois courbé façon bistrot, assises recollées et resserrées. Vendues ensemble."},
+ {id:5,name:"Commode 3 tiroirs en pin",cat:"Meubles",room:"Chambre",price:85,state:"Comme neuf",dims:"L 90 × P 45 × H 80 cm",kind:"dresser",color:"#D8B98A",kg:35,added:"2026-10-17",desc:"Tiroirs qui coulissent parfaitement, pin clair ciré. Idéale dans une chambre ou une entrée."},
+ {id:6,name:"Étagère bois et métal",cat:"Meubles",room:"Bureau",price:45,state:"Très bon état",dims:"L 80 × P 30 × H 120 cm",kind:"shelf",color:"#A87B52",kg:9,added:"2026-10-05",desc:"Structure acier noir et 3 plateaux en bois recyclé. Livrée montée."},
+ {id:7,name:"Bureau scandinave en teck",cat:"Meubles",room:"Bureau",price:140,state:"Très bon état",dims:"L 120 × P 60 × H 75 cm",kind:"desk",color:"#9C6239",kg:28,added:"2026-10-19",desc:"Un tiroir, pieds fuselés, plateau rénové à l'huile de teck. Parfait pour le télétravail ou les révisions."},
+ {id:8,name:"Table de chevet en rotin",cat:"Meubles",room:"Chambre",price:35,state:"Bon état",dims:"L 45 × P 35 × H 55 cm",kind:"bedside",color:"#D4B483",kg:6,added:"2026-10-02",desc:"Rotin tressé à la main, légère et solide. Petite reprise de tressage sur un côté."},
+ {id:9,name:"Réfrigérateur combiné 300 L",cat:"Électroménager",room:"Cuisine",price:260,state:"Très bon état",dims:"L 60 × P 66 × H 186 cm",kind:"fridge",color:"#E3E7E4",kg:65,added:"2026-10-18",desc:"Classe énergétique A+, froid ventilé, congélateur 3 tiroirs. Joints changés, test de température validé sur 48 h."},
+ {id:10,name:"Lave-linge 8 kg, 1 400 tr/min",cat:"Électroménager",room:"Salle de bain",price:210,state:"Bon état",dims:"L 60 × P 58 × H 85 cm",kind:"washer",color:"#EEF0EE",kg:70,added:"2026-10-14",desc:"Hublot avant, 15 programmes. Pompe et filtre nettoyés, trois cycles complets testés en atelier."},
+ {id:11,name:"Micro-ondes grill 25 L",cat:"Électroménager",room:"Cuisine",price:45,state:"Comme neuf",dims:"L 48 × P 39 × H 28 cm",kind:"microwave",color:"#C9CFCB",kg:14,added:"2026-10-16",desc:"Fonction grill et décongélation. Utilisé quelques mois seulement."},
+ {id:12,name:"Bouilloire inox 1,7 L",cat:"Électroménager",room:"Cuisine",price:15,state:"Très bon état",dims:"H 24 cm · 1,7 L",kind:"kettle",color:"#B8C1BD",kg:1.2,added:"2026-10-07",desc:"Détartrée, arrêt automatique vérifié. Socle 360°."},
+ {id:13,name:"Service de table 18 pièces en faïence",cat:"Vaisselle",room:"Cuisine",price:38,state:"Très bon état",dims:"Assiettes Ø 26 cm · bols Ø 14 cm",kind:"plates",color:"#7FA6B8",kg:9,added:"2026-10-19",desc:"6 assiettes plates, 6 creuses, 6 bols. Liseré bleu, aucune ébréchure."},
+ {id:14,name:"Lot de 6 verres à pied gravés",cat:"Vaisselle",room:"Cuisine",price:18,state:"Comme neuf",dims:"H 17 cm · 25 cl",kind:"glasses",color:"#BFD8D2",kg:1.5,added:"2026-10-11",desc:"Verre fin gravé de feuillages. Passent au lave-vaisselle."},
+ {id:15,name:"Cocotte en fonte émaillée 24 cm",cat:"Vaisselle",room:"Cuisine",price:42,state:"Très bon état",dims:"Ø 24 cm · 4,2 L",kind:"cocotte",color:"#C4553C",kg:4.5,added:"2026-10-15",desc:"Émail intérieur intact, compatible induction. De quoi mijoter pendant encore vingt ans."},
+ {id:16,name:"Lampadaire arc en laiton",cat:"Déco",room:"Salon",price:75,state:"Très bon état",dims:"H 190 cm · portée 140 cm",kind:"lamp",color:"#C9A247",kg:8,added:"2026-10-18",desc:"Socle lesté, câble refait à neuf aux normes. Ampoule LED fournie."},
+ {id:17,name:"Miroir rond en rotin 60 cm",cat:"Déco",room:"Salle de bain",price:32,state:"Bon état",dims:"Ø 60 cm",kind:"mirror",color:"#CDA56E",kg:3,added:"2026-10-08",desc:"Contour en rotin naturel, glace sans rayure. Attache murale incluse."},
+ {id:18,name:"Suspension en osier",cat:"Déco",room:"Chambre",price:28,state:"Comme neuf",dims:"Ø 40 × H 30 cm",kind:"pendant",color:"#D2B07A",kg:1.5,added:"2026-10-13",desc:"Osier tressé, douille E27 et câble textile de 1 m. Lumière chaude et tamisée."}
+];
+const byId=id=>P.find(p=>p.id===+id);
+const catOf=k=>CATS.find(c=>c.k===k);
+const eur=n=>n.toLocaleString("fr-FR",{minimumFractionDigits:n%1?2:0,maximumFractionDigits:2})+" €";
+const kgf=n=>n.toLocaleString("fr-FR",{maximumFractionDigits:1})+" kg";
+const dateFr=d=>new Date(d+"T12:00:00").toLocaleDateString("fr-FR",{day:"numeric",month:"short"});
+const FREE=150, FEE=25;
+const ZIPS={"34000":"Montpellier","34070":"Montpellier","34080":"Montpellier","34090":"Montpellier","34170":"Castelnau-le-Lez","34920":"Le Crès","34970":"Lattes","34470":"Pérols","34990":"Juvignac","34430":"Saint-Jean-de-Védas","34790":"Grabels","34880":"Lavérune","34830":"Clapiers / Jacou","34160":"Castries","34740":"Vendargues","34670":"Baillargues / Saint-Brès","34130":"Saint-Aunès","34570":"Pignan / Saussan","34690":"Fabrègues","34750":"Villeneuve-lès-Maguelone","34980":"Montferrier-sur-Lez","34660":"Cournonterral / Cournonsec","34680":"Saint-Georges-d'Orques","34730":"Prades-le-Lez"};
+
+/* ---------- état ---------- */
+const store={get(k,d){try{const v=localStorage.getItem("sp_"+k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem("sp_"+k,JSON.stringify(v))}catch(e){}}};
+const S={cart:store.get("cart",[]),sold:store.get("sold",[]),filt:{cat:"Tous",room:"Toutes",max:300,sort:"recent"},reviews:[],step:0,co:{mode:"livraison"}};
+const save=()=>{store.set("cart",S.cart);store.set("sold",S.sold)};
+const isSold=id=>S.sold.includes(id);
+const inCart=id=>S.cart.includes(id);
+
+/* ---------- composants ---------- */
+const stateBadge=s=>{const n=STATES.indexOf(s)+1;return `<span class="state"><i aria-hidden="true">${[1,2,3].map(i=>`<b class="${i<=n?"on":""}"></b>`).join("")}</i>${s}</span>`};
+function card(p){
+  const c=catOf(p.cat),sold=isSold(p.id),inc=inCart(p.id),fresh=(new Date("2026-10-20")-new Date(p.added))/864e5<=3;
+  return `<article class="card ${sold?"is-sold":""}">
+   <a href="#produit-${p.id}" class="card-art" style="--tint:${c.tint}" aria-label="${p.name}">${art(p.kind,p.color)}<span class="tag">${eur(p.price)}</span>${sold?'<span class="badge-sold">Vendu</span>':fresh?'<span class="badge-new">Nouveau</span>':""}</a>
+   <div class="card-body"><p class="card-meta">${c.label} · ${p.room}</p><h3><a href="#produit-${p.id}">${p.name}</a></h3><p class="dims">${p.dims}</p>
+   <div class="card-foot">${stateBadge(p.state)}${sold?"":`<button class="btn-add ${inc?"in":""}" data-add="${p.id}">${inc?"Dans le panier":"Ajouter"}</button>`}</div></div></article>`;
+}
+const ICON={
+ leaf:`<svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 32C8 16 18 8 34 8c0 16-8 26-24 24z"/><path d="M8 32l14-14"/></svg>`,
+ shield:`<svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 4l13 5v10c0 9-6 14-13 17C13 33 7 28 7 19V9z"/><path d="M14 20l4 4 8-8"/></svg>`,
+ pin:`<svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 36s11-11 11-20a11 11 0 0 0-22 0c0 9 11 20 11 20z"/><circle cx="20" cy="16" r="4"/></svg>`,
+ check:`<svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="20" cy="20" r="17"/><path d="M12 20l6 6 10-12"/></svg>`,
+ truck:`<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 6h12v10H2zM14 10h4l3 3v3h-7"/><circle cx="6" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg>`,
+ store:`<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l2-5h14l2 5M4 9v11h16V9M3 9h18M9 20v-6h6v6"/></svg>`
+};
+
+/* ---------- scène d'accueil ---------- */
+function scene(){
+  const planks=Array.from({length:10},(_,i)=>`<path d="M0 ${470+i*6} H1000" style="stroke:var(--floor2)" stroke-width="1.5" opacity=".7"/>`).join("");
+  return `<svg class="scene" viewBox="0 0 1000 540" role="img" aria-label="Un appartement meublé avec des objets de seconde main : réfrigérateur, vaisselle, miroir, lampadaire et canapé">
+  <rect width="1000" height="470" style="fill:var(--wall)"/>
+  <rect y="470" width="1000" height="70" style="fill:var(--floor)"/>${planks}
+  <g transform="translate(600 40)"><path d="M0 150V60a80 60 0 0 1 160 0v90z" fill="#BFD9DE" stroke="currentColor" stroke-width="4" style="color:var(--ink)"/>
+   <g class="sunrays"><circle cx="110" cy="62" r="26" fill="#E9B949"/>${Array.from({length:10},(_,i)=>{const a=i*36*Math.PI/180;return `<path d="M${110+Math.cos(a)*34} ${62+Math.sin(a)*34}L${110+Math.cos(a)*44} ${62+Math.sin(a)*44}" stroke="#E9B949" stroke-width="4" stroke-linecap="round"/>`}).join("")}</g>
+   <path d="M0 150h160M80 0v150" stroke="currentColor" stroke-width="4" style="color:var(--ink)"/><path d="M-12 150h184" stroke="currentColor" stroke-width="8" stroke-linecap="round" style="color:var(--ink)"/></g>
+  <g style="color:var(--ink)">
+   <rect x="320" y="378" width="210" height="92" rx="4" style="fill:var(--counter)" stroke="currentColor" stroke-width="3"/>
+   <path d="M312 378h226" stroke="currentColor" stroke-width="8" stroke-linecap="round"/>
+   <path d="M425 390v70" stroke="currentColor" stroke-width="3" opacity=".5"/>
+   ${inner("fridge","#E3E7E4",40,162,2.2)}
+   ${inner("plates","#7FA6B8",357,254,0.9)}
+   ${inner("mirror","#CDA56E",380,60,0.9)}
+   ${inner("lamp","#C9A247",400,139,2.4)}
+   ${inner("sofa","#8FAA8B",540,190,2.0)}
+   ${inner("plant","#5F8A63",860,250,1.3)}
+  </g></svg>`;
+}
+const HOTS=[{id:9,x:22,y:52},{id:13,x:45,y:63},{id:17,x:48,y:26},{id:16,x:78.5,y:43},{id:1,x:72,y:74}];
+
+/* ---------- vues ---------- */
+const V={};
+V.accueil=()=>{
+  const fresh=[...P].filter(p=>!isSold(p.id)).sort((a,b)=>b.added.localeCompare(a.added)).slice(0,8);
+  const stock=P.filter(p=>!isSold(p.id)).length;
+  return `<section class="hero"><div class="wrap">
+   <div class="hero-top">
+    <div><p class="eyebrow rise">Seconde main · Montpellier</p><h1 class="rise d2">Donnez une <em>seconde vie</em> à votre intérieur.</h1></div>
+    <div class="rise d3"><p class="hero-lead">Meubles, électroménager, vaisselle et déco d'occasion. On les rachète, on les vérifie, on les nettoie, puis on les livre chez vous.</p>
+     <div class="hero-cta"><a class="btn btn-primary" href="#boutique">Découvrir la boutique</a><a class="btn btn-ghost" href="#vendre">Vendre mes objets</a></div>
+     <div class="hero-facts"><span class="chip">${stock} pièces en stock</span><span class="chip">Livraison offerte dès 150 €</span></div></div>
+   </div>
+   <div class="scene-box">${scene()}<span class="scene-hint"><i></i>Touchez les objets pour les découvrir</span>
+    ${HOTS.map(h=>{const p=byId(h.id);return `<button class="hot" style="left:${h.x}%;top:${h.y}%" data-go="produit-${p.id}" aria-label="${p.name}, ${eur(p.price)}">+<span class="tip">${p.name.split(" ").slice(0,3).join(" ")} · ${eur(p.price)}</span></button>`}).join("")}
+   </div>
+   <div class="promises">
+    <div class="promise">${ICON.leaf}<div><b>Seconde main d'abord</b><span>Chaque objet revendu, c'est un objet de moins à la déchetterie.</span></div></div>
+    <div class="promise">${ICON.shield}<div><b>Testé et garanti</b><span>L'électroménager est contrôlé en atelier et garanti 3 mois.</span></div></div>
+    <div class="promise">${ICON.pin}<div><b>100 % Montpellier</b><span>Livraison dans la métropole ou retrait au magasin.</span></div></div>
+   </div></div></section>
+
+  <section class="block"><div class="wrap">
+   <div class="head-row"><div><p class="eyebrow">Arrivés cette semaine</p><h2>Nouveaux arrivages</h2></div><a class="link-more" href="#boutique" data-sort="recent">Tout voir →</a></div>
+   <div class="grid">${fresh.map(card).join("")}</div></div></section>
+
+  <section class="block"><div class="wrap">
+   <div class="head-row"><div><p class="eyebrow">Par univers</p><h2>Tout pour équiper votre logement</h2></div></div>
+   <div class="cats">${CATS.map(c=>`<a class="cat" href="#boutique" data-cat="${c.k}" style="--tint:${c.tint}"><div><h3>${c.label}</h3><span>${c.blurb} · ${P.filter(p=>p.cat===c.k&&!isSold(p.id)).length} pièces</span></div>${art(c.kind,c.color)}</a>`).join("")}</div></div></section>
+
+  <section class="block"><div class="wrap">
+   <div class="head-row"><div><p class="eyebrow">Notre fonctionnement</p><h2>Du grenier à votre salon</h2></div></div>
+   <div class="steps">
+    <div class="step"><div class="n">1</div><h3>On rachète</h3><p>Vous nous envoyez des photos, on vous fait une offre sous 48 h et on vient chercher l'objet.</p></div>
+    <div class="step"><div class="n">2</div><h3>On vérifie</h3><p>Nettoyage, petites réparations, test complet de l'électroménager en atelier.</p></div>
+    <div class="step"><div class="n">3</div><h3>On revend</h3><p>L'objet arrive en boutique avec son état, ses dimensions et sa garantie, puis chez vous.</p></div>
+   </div>
+   <div class="sell-band"><h3>Un meuble qui dort chez vous ?</h3><a class="btn" href="#vendre">Faire estimer mon objet</a></div></div></section>
+
+  <section class="block"><div class="wrap">
+   <div class="head-row"><div><p class="eyebrow">Ils ont meublé leur appart</p><h2>Avis clients</h2></div><a class="link-more" href="#avis">Tous les avis →</a></div>
+   <div class="reviews">${REVIEWS.slice(0,3).map(review).join("")}</div>
+   <p class="note-demo" style="margin-top:12px">Avis d'exemple, à remplacer par vos vrais avis clients.</p></div></section>`;
+};
+
+V.boutique=()=>`<div class="wrap"><div class="page-head"><p class="eyebrow">La boutique</p><h1>Des pièces uniques, prêtes à vivre chez vous</h1><p>Chaque objet est vérifié et existe en un seul exemplaire. Quand il est vendu, il disparaît.</p></div>
+ <div class="shop">
+  <aside class="filters" id="filters" aria-label="Filtres">
+   <fieldset><legend>Catégorie</legend><div class="pills">${["Tous",...CATS.map(c=>c.k)].map(k=>`<button class="pill" data-f="cat" data-v="${k}" aria-pressed="${S.filt.cat===k}">${k==="Tous"?"Tout":catOf(k).label}</button>`).join("")}</div></fieldset>
+   <fieldset><legend>Pièce de la maison</legend><div class="pills">${["Toutes",...ROOMS].map(k=>`<button class="pill" data-f="room" data-v="${k}" aria-pressed="${S.filt.room===k}">${k}</button>`).join("")}</div></fieldset>
+   <fieldset><legend><label for="maxPrice">Prix maximum</label></legend><input type="range" id="maxPrice" min="10" max="300" step="5" value="${S.filt.max}"><span class="range-val" id="maxVal">${S.filt.max>=300?"Tous les prix":"Jusqu'à "+eur(S.filt.max)}</span></fieldset>
+   <button class="btn btn-ghost" id="resetF" type="button">Réinitialiser</button>
+  </aside>
+  <div><div class="toolbar"><button class="btn btn-ghost filters-toggle" id="fToggle" type="button" aria-expanded="false" aria-controls="filters">Filtres</button><span class="count" id="count"></span>
+   <label class="sr" for="sort">Trier</label><select id="sort"><option value="recent">Plus récents</option><option value="asc">Prix croissant</option><option value="desc">Prix décroissant</option></select></div>
+   <div class="grid" id="results"></div></div>
+ </div></div>`;
+function renderResults(){
+  const f=S.filt;let list=P.filter(p=>(f.cat==="Tous"||p.cat===f.cat)&&(f.room==="Toutes"||p.room===f.room)&&(f.max>=300||p.price<=f.max));
+  list.sort((a,b)=>f.sort==="asc"?a.price-b.price:f.sort==="desc"?b.price-a.price:b.added.localeCompare(a.added));
+  list.sort((a,b)=>isSold(a.id)-isSold(b.id));
+  const el=document.getElementById("results");if(!el)return;
+  el.innerHTML=list.length?list.map(card).join(""):`<div class="empty">Aucun objet ne correspond pour l'instant. Élargissez le prix ou changez de pièce, de nouveaux arrivages tombent chaque semaine.</div>`;
+  document.getElementById("count").textContent=list.length+(list.length>1?" objets":" objet");
+}
+
+V.produit=id=>{
+  const p=byId(id);if(!p)return V.boutique();
+  const c=catOf(p.cat),sold=isSold(p.id),inc=inCart(p.id),n=STATES.indexOf(p.state);
+  const sim=P.filter(x=>x.id!==p.id&&(x.room===p.room||x.cat===p.cat)&&!isSold(x.id)).slice(0,4);
+  return `<div class="wrap"><p class="crumbs"><a href="#boutique">Boutique</a> / ${c.label} / ${p.room}</p>
+  <div class="product">
+   <div><div class="gallery-main" id="gMain" style="--tint:${c.tint}">${art(p.kind,p.color)}<span class="tag">${eur(p.price)}</span>${sold?'<span class="badge-sold">Vendu</span>':""}</div>
+    <div class="thumbs" role="group" aria-label="Vues de l'objet">${["Vue de face","Vue de l'autre côté","Détail"].map((t,i)=>`<button class="thumb" style="--tint:${c.tint}" data-view="${i}" aria-pressed="${i===0}" aria-label="${t}">${art(p.kind,p.color,i?"view-"+i:"")}</button>`).join("")}</div></div>
+   <div class="p-info"><p class="eyebrow">${c.label} · ${p.room} · Pièce unique</p><h1>${p.name}</h1><p class="p-price">${eur(p.price)}</p>
+    <p class="p-desc">${p.desc}</p>
+    <dl class="spec"><div><dt>État</dt><dd>${p.state}</dd></div><div><dt>Dimensions</dt><dd>${p.dims}</dd></div><div><dt>Référence</dt><dd>SP-${String(p.id).padStart(4,"0")}</dd></div><div><dt>Arrivé le</dt><dd>${dateFr(p.added)}</dd></div></dl>
+    <div class="state-meter" aria-hidden="true">${STATES.map((s,i)=>`<span class="${i===n?"on":""}">${s}</span>`).join("")}</div>
+    ${p.cat==="Électroménager"?`<div class="guarantee">${ICON.shield}<div><b>Testé en atelier et garanti 3 mois</b><br><span style="font-size:14px;color:var(--muted)">Panne dans les 3 mois : réparation ou échange, sans frais.</span></div></div>`:""}
+    <div class="p-actions">${sold?`<button class="btn btn-primary" disabled>Déjà vendu</button>`:`<button class="btn btn-primary" data-add="${p.id}" data-open="1">${inc?"Voir le panier":"Ajouter au panier"}</button>`}<a class="btn btn-ghost" href="#contact">Poser une question</a></div>
+    <p class="impact">${ICON.leaf.replace("<svg","<svg width='20' height='20' style='color:var(--ok)'")}<span>En l'achetant d'occasion, vous évitez environ <b>${kgf(p.kg)}</b> de déchets.</span></p>
+    <div class="p-delivery"><div>${ICON.truck}<span>Livraison à domicile sur Montpellier et sa métropole : ${FEE} €, <b>offerte dès ${FREE} €</b>.</span></div><div>${ICON.store}<span>Retrait gratuit en magasin, mis de côté 7 jours.</span></div></div>
+   </div></div>
+  ${sim.length?`<section class="block"><div class="head-row"><h2>Ça irait bien avec</h2></div><div class="grid">${sim.map(card).join("")}</div></section>`:""}</div>`;
+};
+
+V.vendre=()=>`<div class="wrap"><div class="page-head"><p class="eyebrow">Vendre vos objets</p><h1>Faites estimer votre objet en 2 minutes</h1><p>Décrivez-le, ajoutez quelques photos, on vous répond sous 48 h avec une offre de rachat. Si elle vous convient, on vient le chercher.</p></div>
+ <div class="sell-layout">
+  <div class="sell-aside">
+   <div class="panel"><h3>Comment ça se passe</h3><ol class="tl">
+    <li><b>1</b><div><strong>Vous envoyez la demande</strong><span>Photos, état, dimensions.</span></div></li>
+    <li><b>2</b><div><strong>On vous fait une offre</strong><span>Sous 48 h, par téléphone ou e-mail.</span></div></li>
+    <li><b>3</b><div><strong>On récupère l'objet</strong><span>Enlèvement chez vous dans la métropole, ou dépôt au magasin.</span></div></li>
+    <li><b>4</b><div><strong>Vous êtes payé</strong><span>Le jour même, par virement.</span></div></li></ol></div>
+   <div class="panel"><h3>Ce qu'on reprend</h3><div class="yesno"><div><b style="color:var(--ok)">Oui</b><ul><li>Meubles en bon état</li><li>Électroménager de moins de 8 ans</li><li>Vaisselle complète ou en lot</li><li>Luminaires et déco</li></ul></div><div><b style="color:var(--warn)">Non</b><ul><li>Literie et matelas</li><li>Meubles cassés ou très abîmés</li><li>Appareils en panne</li><li>Vaisselle ébréchée</li></ul></div></div></div>
+  </div>
+  <div class="panel" id="sellBox">
+   <form class="form" id="sellForm" novalidate>
+    <div class="row2"><div class="field"><label for="s-cat">Catégorie</label><select id="s-cat" required><option value="">Choisir…</option>${CATS.map(c=>`<option>${c.label}</option>`).join("")}</select></div>
+     <div class="field"><label for="s-name">Objet</label><input id="s-name" required placeholder="Ex. buffet en chêne, lave-vaisselle…"></div></div>
+    <div class="field"><span class="lab" id="s-state-l">État</span><div class="radios" role="radiogroup" aria-labelledby="s-state-l">${STATES.slice().reverse().map((s,i)=>`<label><input type="radio" name="s-state" id="s-state-${i}" value="${s}" ${i===1?"checked":""}>${s}</label>`).join("")}<label><input type="radio" name="s-state" id="s-state-3" value="À rafraîchir">À rafraîchir</label></div></div>
+    <div class="field"><span class="lab">Dimensions (cm)</span><div class="row3"><input id="s-l" inputmode="numeric" placeholder="Largeur" aria-label="Largeur en cm"><input id="s-p" inputmode="numeric" placeholder="Profondeur" aria-label="Profondeur en cm"><input id="s-h" inputmode="numeric" placeholder="Hauteur" aria-label="Hauteur en cm"></div></div>
+    <div class="field"><label for="s-desc">Description</label><textarea id="s-desc" placeholder="Âge, marque, défauts éventuels, raison de la vente…"></textarea></div>
+    <div class="field"><span class="lab">Photos</span><label class="drop" id="drop" for="s-photos"><b>Ajoutez vos photos</b><br><small>Glissez-les ici ou cliquez · 6 max · une vue d'ensemble et les défauts</small></label><input type="file" id="s-photos" accept="image/*" multiple class="sr"><div class="previews" id="previews"></div></div>
+    <div class="field"><label for="s-price">Prix espéré <small>(facultatif)</small></label><input id="s-price" inputmode="numeric" placeholder="Ex. 80 €"></div>
+    <div class="row2"><div class="field"><label for="s-first">Prénom</label><input id="s-first" required autocomplete="given-name"></div><div class="field"><label for="s-zip">Code postal</label><input id="s-zip" required inputmode="numeric" maxlength="5" autocomplete="postal-code"></div></div>
+    <div class="row2"><div class="field"><label for="s-tel">Téléphone</label><input id="s-tel" type="tel" autocomplete="tel"></div><div class="field"><label for="s-mail">E-mail</label><input id="s-mail" type="email" required autocomplete="email"></div></div>
+    <label class="check"><input type="checkbox" id="s-ok" required>J'accepte que mes coordonnées servent uniquement à traiter ma demande de rachat.</label>
+    <p class="err" id="sellErr" role="alert"></p>
+    <button class="btn btn-primary" type="submit">Envoyer ma demande d'estimation</button>
+   </form></div>
+ </div></div>`;
+
+const REVIEWS=[
+ {n:"Camille",q:"Antigone",s:5,t:"Canapé livré le surlendemain, impeccable. Les livreurs l'ont même monté au 4e sans ascenseur."},
+ {n:"Yanis",q:"Étudiant, Boutonnet",s:5,t:"J'ai équipé tout mon studio pour moins de 300 €. Le frigo marche nickel, et il est garanti."},
+ {n:"Léa et Hugo",q:"Port Marianne",s:4,t:"Super table de ferme. Le retrait au magasin était rapide, on aurait juste aimé plus de créneaux le samedi."},
+ {n:"Martine",q:"Castelnau-le-Lez",s:5,t:"Ils m'ont racheté le buffet de ma mère au bon prix et sont venus le chercher. Très respectueux."},
+ {n:"Sofiane",q:"Beaux-Arts",s:5,t:"Lampadaire vintage trouvé ici, câble refait à neuf. Je repasse chaque semaine voir les arrivages."},
+ {n:"Inès",q:"Lattes",s:4,t:"Bonne sélection de vaisselle, tout était propre. Livraison offerte grâce au seuil des 150 €."}];
+const review=r=>`<article class="review"><div class="stars" aria-label="${r.s} sur 5">${"★".repeat(r.s)}<span style="opacity:.3">${"★".repeat(5-r.s)}</span></div><p>${esc(r.t)}</p><footer><b>${esc(r.n)}</b> · ${esc(r.q)}</footer></article>`;
+V.avis=()=>{const all=[...S.reviews,...REVIEWS];const avg=(all.reduce((a,r)=>a+r.s,0)/all.length).toFixed(1).replace(".",",");
+ return `<div class="wrap"><div class="page-head"><p class="eyebrow">Avis clients</p><h1>Ce qu'en disent nos clients</h1><p>${all.length} avis · moyenne ${avg} sur 5. <span class="note-demo">Les avis affichés sont des exemples à remplacer.</span></p></div>
+ <div class="sell-layout"><div class="panel"><h3>Laisser un avis</h3><form class="form" id="revForm" novalidate>
+  <div class="field"><span class="lab" id="rv-l">Votre note</span><div class="radios" role="radiogroup" aria-labelledby="rv-l">${[5,4,3,2,1].map(n=>`<label><input type="radio" name="rv" id="rv-${n}" value="${n}" ${n===5?"checked":""}>${n} ★</label>`).join("")}</div></div>
+  <div class="row2"><div class="field"><label for="rv-name">Prénom</label><input id="rv-name" required></div><div class="field"><label for="rv-q">Quartier ou ville</label><input id="rv-q" placeholder="Ex. Écusson"></div></div>
+  <div class="field"><label for="rv-text">Votre avis</label><textarea id="rv-text" required></textarea></div>
+  <p class="err" id="rvErr" role="alert"></p><button class="btn btn-primary" type="submit">Publier mon avis</button></form></div>
+  <div class="reviews" id="revList">${all.map(review).join("")}</div></div></div>`;};
+
+const FAQ=[
+ {id:"livraison",t:"Livraison et retrait",q:[
+  ["Où livrez-vous ?","Dans Montpellier et les communes de la métropole (Castelnau-le-Lez, Lattes, Pérols, Juvignac, Saint-Jean-de-Védas…). Vous pouvez vérifier votre code postal sur la page Contact."],
+  ["Combien coûte la livraison ?",`${FEE} € par commande, et elle est offerte dès ${FREE} € d'achat. On monte les meubles dans la pièce de votre choix.`],
+  ["Puis-je venir chercher mon achat ?","Oui, le retrait en magasin est gratuit. Votre commande est mise de côté pendant 7 jours."],
+  ["Sous quel délai suis-je livré ?","En général sous 2 à 5 jours. On vous appelle pour fixer un créneau."]]},
+ {id:"garantie",t:"Garantie",q:[
+  ["L'électroménager est-il garanti ?","Oui. Chaque appareil est testé en atelier puis garanti 3 mois. En cas de panne, on le répare ou on l'échange sans frais."],
+  ["Et les meubles ?","Ils sont vérifiés et nettoyés avant la mise en vente. Leur état exact est indiqué sur chaque fiche, avec les éventuels défauts."]]},
+ {id:"rachat",t:"Vendre vos objets",q:[
+  ["Comment vous vendre un objet ?","Remplissez le formulaire « Vendre vos objets » avec quelques photos. On vous fait une offre sous 48 h."],
+  ["Venez-vous chercher les objets ?","Oui, dans toute la métropole et gratuitement, dès que l'offre est acceptée."],
+  ["Comment suis-je payé ?","Par virement, le jour de l'enlèvement ou du dépôt."]]},
+ {id:"etat",t:"Objets et état",q:[
+  ["Que veulent dire les niveaux d'état ?","Comme neuf : aucune trace d'usage. Très bon état : légères traces invisibles à l'usage. Bon état : marques visibles, décrites sur la fiche, sans effet sur le fonctionnement."],
+  ["Les objets sont-ils uniques ?","Oui, chaque pièce existe en un seul exemplaire. Une fois vendue, elle disparaît de la boutique."]]},
+ {id:"retours",t:"Retours",q:[
+  ["Puis-je retourner un achat ?","Pour un achat en ligne, vous disposez de 14 jours pour changer d'avis. L'objet doit être rendu dans l'état où vous l'avez reçu."],
+  ["Comment se passe un retour ?","Contactez-nous, on organise l'enlèvement ou vous le rapportez au magasin. Le remboursement est fait sous 14 jours."]]}];
+V.faq=()=>`<div class="wrap"><div class="page-head"><p class="eyebrow">Questions fréquentes</p><h1>On répond à tout</h1></div>
+ <div class="faq-layout"><nav class="faq-nav" aria-label="Rubriques">${FAQ.map(g=>`<a href="#faq" data-jump="${g.id}">${g.t}</a>`).join("")}</nav>
+ <div>${FAQ.map(g=>`<div class="faq-group" id="g-${g.id}"><h2>${g.t}</h2>${g.q.map((x,i)=>`<details class="qa" ${i===0&&g.id==="livraison"?"open":""}><summary>${x[0]}</summary><p>${x[1]}</p></details>`).join("")}</div>`).join("")}
+ <div class="panel"><h3>Vous ne trouvez pas votre réponse ?</h3><a class="btn btn-primary" href="#contact">Nous écrire</a></div></div></div></div>`;
+
+V.apropos=()=>{const kg=P.reduce((a,p)=>a+p.kg,0);
+ return `<div class="wrap"><div class="page-head"><p class="eyebrow">À propos</p><h1>Une boutique de seconde main, née à Montpellier</h1></div>
+ <div class="about"><div><h2 style="font-size:30px">Pourquoi Seconde Pièce</h2>
+  <p>Chaque année, des tonnes de meubles et d'appareils en état de marche finissent en déchetterie, souvent au moment d'un déménagement. Pendant ce temps, étudiants, jeunes couples et familles cherchent à s'équiper sans exploser leur budget.</p>
+  <p>Seconde Pièce fait le lien. On rachète ce dont vous n'avez plus besoin, on le vérifie, on le remet en état si besoin, et on le propose à quelqu'un d'autre, ici, à Montpellier.</p>
+  <p>Rien que le stock actuel de la boutique représente environ <b style="color:var(--ok)">${kgf(kg)}</b> d'objets qui ne partiront pas à la benne.</p></div>
+  <div class="about-art"><svg viewBox="0 0 600 420" aria-hidden="true" style="color:var(--ink)"><rect width="600" height="420" style="fill:var(--t-meubles)"/><rect y="340" width="600" height="80" style="fill:var(--floor)"/>${inner("shelf","#A87B52",20,120,1.6)}${inner("armchair","#D9A441",250,170,1.55)}${inner("pendant","#D2B07A",290,0,0.9)}${inner("plant","#5F8A63",430,175,1.3)}</svg></div></div>
+ <section class="block"><div class="values">
+  <div class="value"><h3>Réemploi</h3><p>Un objet qui sert encore n'a rien à faire à la déchetterie. On répare plutôt que de jeter.</p></div>
+  <div class="value"><h3>Transparence</h3><p>État, dimensions, défauts : tout est écrit sur la fiche. Pas de mauvaise surprise à la livraison.</p></div>
+  <div class="value"><h3>Proximité</h3><p>Une équipe locale, des trajets courts, et des objets qui restent dans le quartier.</p></div></div></section></div>`;};
+
+V.contact=()=>`<div class="wrap"><div class="page-head"><p class="eyebrow">Contact</p><h1>Passez nous voir ou écrivez-nous</h1></div>
+ <div class="contact"><div class="panel" id="ctBox"><form class="form" id="ctForm" novalidate>
+   <div class="row2"><div class="field"><label for="c-name">Nom</label><input id="c-name" required autocomplete="name"></div><div class="field"><label for="c-mail">E-mail</label><input id="c-mail" type="email" required autocomplete="email"></div></div>
+   <div class="field"><label for="c-sub">Sujet</label><select id="c-sub"><option>Question sur un objet</option><option>Livraison ou retrait</option><option>Vendre un objet</option><option>Garantie</option><option>Autre</option></select></div>
+   <div class="field"><label for="c-msg">Message</label><textarea id="c-msg" required></textarea></div>
+   <p class="err" id="ctErr" role="alert"></p><button class="btn btn-primary" type="submit">Envoyer le message</button></form></div>
+  <div><dl class="info-list">
+   <div><dt>Magasin</dt><dd>Adresse à compléter, Montpellier</dd></div>
+   <div><dt>Horaires</dt><dd>Mardi au samedi, 10 h – 19 h (à confirmer)</dd></div>
+   <div><dt>Téléphone</dt><dd>À compléter</dd></div>
+   <div><dt>E-mail</dt><dd>À compléter</dd></div></dl>
+   <div class="map">${mapSvg()}</div>
+   <div class="field" style="margin-top:18px"><label for="zip">Êtes-vous dans la zone de livraison ?</label><div class="zone-check"><input id="zip" inputmode="numeric" maxlength="5" placeholder="Votre code postal"><button class="btn btn-primary" id="zipBtn" type="button">Vérifier</button></div><p class="zone-res" id="zipRes" role="status"></p></div>
+  </div></div></div>`;
+function mapSvg(){
+  const places=[["Écusson",300,170],["Antigone",360,190],["Port Marianne",410,250],["Beaux-Arts",310,120],["Castelnau-le-Lez",420,95],["Lattes",360,320],["Juvignac",130,150],["Saint-Jean-de-Védas",160,290],["Pérols",500,330],["Grabels",170,60]];
+  return `<svg viewBox="0 0 600 380" role="img" aria-label="Plan schématique de la zone de livraison autour de Montpellier"><rect width="600" height="380" style="fill:var(--surface)"/>
+  <circle cx="310" cy="190" r="230" style="fill:var(--t-meubles)" opacity=".9"/>
+  <path d="M440 0 Q400 80 380 150 T360 260 Q350 320 330 380" fill="none" stroke="#7FA6B8" stroke-width="6" stroke-linecap="round"/>
+  <text x="392" y="232" style="fill:#5D8799" font-size="13" font-style="italic">Le Lez</text>
+  <path d="M60 170 Q200 180 300 170 T560 200" fill="none" style="stroke:var(--line)" stroke-width="5" stroke-dasharray="1 0"/>
+  ${places.map(([n,x,y])=>`<circle cx="${x}" cy="${y}" r="4" style="fill:var(--muted)"/><text x="${x+8}" y="${y+4}" font-size="13" style="fill:var(--ink)" font-family="Figtree,sans-serif">${n}</text>`).join("")}
+  <g transform="translate(300 170)"><path d="M0 0c-10-14-16-22-16-30a16 16 0 0 1 32 0c0 8-6 16-16 30z" style="fill:var(--moss)" transform="translate(0 -4)"/><circle cx="0" cy="-34" r="6" style="fill:var(--on-moss)"/></g>
+  <text x="20" y="360" font-size="12" style="fill:var(--muted)" font-family="IBM Plex Mono,monospace">Plan schématique · zone verte = livraison</text></svg>`;
+}
+
+/* ---------- utilitaires ---------- */
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+let tT;function toast(m){const t=document.getElementById("toast");t.textContent=m;t.classList.add("show");clearTimeout(tT);tT=setTimeout(()=>t.classList.remove("show"),2400)}
+const mailOk=v=>/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+
+/* ---------- routeur ---------- */
+const app=document.getElementById("app");
+function route(){
+  const h=(location.hash||"#accueil").slice(1);
+  let r=h,arg=null;
+  if(h.startsWith("produit-")){r="produit";arg=h.slice(8)}
+  if(!V[r])r="accueil";
+  app.innerHTML=V[r](arg);
+  document.querySelectorAll("nav.main a").forEach(a=>a.toggleAttribute("aria-current",a.dataset.r===r||(r==="produit"&&a.dataset.r==="boutique")));
+  document.querySelectorAll("nav.main a[aria-current]").forEach(a=>a.setAttribute("aria-current","page"));
+  document.getElementById("mainNav").classList.remove("open");document.getElementById("menuBtn").setAttribute("aria-expanded","false");
+  window.scrollTo(0,0);
+  if(r==="boutique"){document.getElementById("sort").value=S.filt.sort;renderResults()}
+}
+window.addEventListener("hashchange",route);
+
+/* ---------- panier ---------- */
+const drawer=document.getElementById("drawer"),overlay=document.getElementById("overlay");
+function updCount(){document.getElementById("cartCount").textContent=S.cart.length}
+function totals(){const sub=S.cart.reduce((a,id)=>a+byId(id).price,0);const fee=(S.co.mode==="retrait"||sub>=FREE||!sub)?0:FEE;return{sub,fee,tot:sub+fee,kg:S.cart.reduce((a,id)=>a+byId(id).kg,0)}}
+function openCart(step){S.step=step||0;drawer.classList.add("open");overlay.classList.add("open");drawer.setAttribute("aria-hidden","false");renderCart();setTimeout(()=>document.getElementById("drClose").focus(),50)}
+function closeCart(){drawer.classList.remove("open");overlay.classList.remove("open");drawer.setAttribute("aria-hidden","true");if(S.step===3)S.step=0}
+function addToCart(id,open){id=+id;if(isSold(id))return;if(!inCart(id)){S.cart.push(id);save();toast("Ajouté au panier");}updCount();refreshButtons();if(open)openCart(0)}
+function refreshButtons(){document.querySelectorAll("[data-add]").forEach(b=>{const inc=inCart(+b.dataset.add);if(b.classList.contains("btn-add")){b.classList.toggle("in",inc);b.textContent=inc?"Dans le panier":"Ajouter"}else{b.textContent=inc?"Voir le panier":"Ajouter au panier"}})}
+function lineHtml(id){const p=byId(id),c=catOf(p.cat);return `<div class="line"><div class="mini" style="--tint:${c.tint}">${art(p.kind,p.color)}</div><div><b>${p.name}</b><small>${p.state}${p.cat==="Électroménager"?" · garanti 3 mois":""}</small>${S.step===0?`<br><button data-rm="${id}">Retirer</button>`:""}</div><span class="pr">${eur(p.price)}</span></div>`}
+function totHtml(){const t=totals();return `<div class="tot"><span>Sous-total</span><span>${eur(t.sub)}</span></div><div class="tot"><span>${S.co.mode==="retrait"?"Retrait en magasin":"Livraison"}</span><span>${t.fee?eur(t.fee):"Offerte"}</span></div><div class="tot big"><span>Total</span><span>${eur(t.tot)}</span></div>`}
+function renderCart(){
+  const body=document.getElementById("drBody"),foot=document.getElementById("drFoot"),t=totals();
+  document.getElementById("drSteps").innerHTML=[0,1,2,3].map(i=>`<span class="${i<=S.step?"on":""}"></span>`).join("");
+  document.getElementById("drTitle").textContent=["Votre panier","Livraison","Paiement","Merci !"][S.step];
+  if(S.step===0){
+    if(!S.cart.length){body.innerHTML=`<div class="empty" style="margin-top:10px">Votre panier est vide.<br>Les nouveaux arrivages sont en boutique.</div>`;foot.innerHTML=`<a class="btn btn-primary" href="#boutique" id="goShop">Voir la boutique</a>`;return}
+    const left=Math.max(0,FREE-t.sub);
+    body.innerHTML=`<div class="free">${left?`Plus que <b>${eur(left)}</b> pour la livraison offerte.`:`<b>La livraison est offerte</b> pour cette commande.`}<div class="bar"><i style="width:${Math.min(100,t.sub/FREE*100)}%"></i></div></div>${S.cart.map(lineHtml).join("")}<p class="eco" style="margin-top:14px">Ce panier évite environ ${kgf(t.kg)} de déchets.</p>`;
+    foot.innerHTML=totHtml()+`<button class="btn btn-primary" data-step="1">Passer commande</button>`;
+  }else if(S.step===1){
+    const c=S.co;
+    body.innerHTML=`<form class="form" id="coForm" novalidate>
+     <div class="field"><span class="lab">Mode de réception</span><div class="radios"><label><input type="radio" name="mode" id="m-liv" value="livraison" ${c.mode==="livraison"?"checked":""}>Livraison à domicile</label><label><input type="radio" name="mode" id="m-ret" value="retrait" ${c.mode==="retrait"?"checked":""}>Retrait en magasin</label></div></div>
+     <div class="row2"><div class="field"><label for="co-name">Nom complet</label><input id="co-name" value="${esc(c.name||"")}" autocomplete="name"></div><div class="field"><label for="co-tel">Téléphone</label><input id="co-tel" type="tel" value="${esc(c.tel||"")}" autocomplete="tel"></div></div>
+     <div class="field"><label for="co-mail">E-mail</label><input id="co-mail" type="email" value="${esc(c.mail||"")}" autocomplete="email"></div>
+     <div id="addrBlock" ${c.mode==="retrait"?"hidden":""}>
+      <div class="field"><label for="co-addr">Adresse</label><input id="co-addr" value="${esc(c.addr||"")}" autocomplete="street-address" placeholder="N° et rue, étage, digicode"></div>
+      <div class="field" style="margin-top:14px"><label for="co-zip">Code postal</label><input id="co-zip" inputmode="numeric" maxlength="5" value="${esc(c.zip||"")}" autocomplete="postal-code"><p class="zone-res" id="coZip"></p></div>
+      <div class="field" style="margin-top:6px"><label for="co-slot">Créneau souhaité</label><select id="co-slot"><option>Mardi ou mercredi, matin</option><option>Mardi ou mercredi, après-midi</option><option>Jeudi ou vendredi, matin</option><option>Jeudi ou vendredi, après-midi</option><option>Samedi, matin</option></select></div></div>
+     <div id="retBlock" class="demo-box" ${c.mode==="retrait"?"":"hidden"}>Retrait gratuit au magasin (adresse à compléter), du mardi au samedi. Votre commande est mise de côté 7 jours.</div>
+     <p class="err" id="coErr" role="alert"></p></form>`;
+    foot.innerHTML=totHtml()+`<div style="display:flex;gap:8px"><button class="btn btn-ghost" data-step="0">Retour</button><button class="btn btn-primary" style="flex:1" id="toPay">Continuer vers le paiement</button></div>`;
+    if(c.zip)checkZip(c.zip,document.getElementById("coZip"));
+  }else if(S.step===2){
+    body.innerHTML=`${S.cart.map(lineHtml).join("")}<div class="panel" style="margin-top:16px;padding:16px"><b>${S.co.mode==="retrait"?"Retrait en magasin":"Livraison à "+esc(S.co.addr||"")+", "+esc(S.co.zip||"")}</b><br><small style="color:var(--muted)">${esc(S.co.name||"")} · ${esc(S.co.tel||"")}</small></div>
+     <div class="field" style="margin-top:16px"><span class="lab">Moyen de paiement</span><div class="radios pay-opt"><label><input type="radio" name="pay" id="pay-cb" checked>Carte bancaire</label><label><input type="radio" name="pay" id="pay-pp">PayPal</label><label><input type="radio" name="pay" id="pay-3x">Paiement en 3 fois</label></div></div>
+     <p class="demo-box" style="margin-top:14px">Démonstration : aucun paiement réel n'est effectué. Sur le site final, le paiement sécurisé est géré par Wix.</p>`;
+    foot.innerHTML=totHtml()+`<div style="display:flex;gap:8px"><button class="btn btn-ghost" data-step="1">Retour</button><button class="btn btn-primary" style="flex:1" id="payBtn">Payer ${eur(t.tot)}</button></div>`;
+  }else{
+    body.innerHTML=`<div class="success">${ICON.check}<h3>Commande confirmée</h3><p>Commande n° <b style="font-family:var(--f-mono)">${S.co.num}</b>. ${S.co.mode==="retrait"?"On vous prévient dès qu'elle est prête au magasin.":"On vous appelle sous 24 h pour confirmer le créneau de livraison."}</p><p class="eco" style="margin-top:14px">Vous avez évité environ ${kgf(S.co.kg)} de déchets. Merci !</p></div>`;
+    foot.innerHTML=`<button class="btn btn-primary" id="doneBtn">Continuer mes achats</button>`;
+  }
+}
+function checkZip(v,el){v=(v||"").trim();el.className="zone-res";if(!/^\d{5}$/.test(v)){el.textContent=v?"Entrez un code postal à 5 chiffres.":"";return false}
+  if(ZIPS[v]){el.classList.add("ok");el.textContent=`${ZIPS[v]} : livraison possible, offerte dès ${FREE} €.`;return true}
+  el.classList.add("no");el.textContent="Hors zone de livraison pour l'instant. Le retrait en magasin reste possible.";return false}
+function readCo(){const g=id=>{const e=document.getElementById(id);return e?e.value.trim():""};Object.assign(S.co,{name:g("co-name"),tel:g("co-tel"),mail:g("co-mail"),addr:g("co-addr"),zip:g("co-zip")})}
+
+/* ---------- événements ---------- */
+document.addEventListener("click",e=>{
+  const t=e.target.closest("[data-add],[data-rm],[data-step],[data-go],[data-cat],[data-sort],[data-f],[data-view],[data-jump],#toPay,#payBtn,#doneBtn,#goShop,#resetF,#fToggle,#zipBtn");
+  if(!t)return;
+  if(t.dataset.add){e.preventDefault();if(inCart(+t.dataset.add)&&t.dataset.open){openCart(0);return}addToCart(t.dataset.add,!!t.dataset.open);return}
+  if(t.dataset.rm){S.cart=S.cart.filter(x=>x!==+t.dataset.rm);save();updCount();renderCart();refreshButtons();return}
+  if(t.dataset.step){if(S.step===1)readCo();S.step=+t.dataset.step;renderCart();return}
+  if(t.dataset.go){location.hash=t.dataset.go;return}
+  if(t.dataset.cat){S.filt={cat:t.dataset.cat,room:"Toutes",max:300,sort:"recent"};return}
+  if(t.dataset.sort){S.filt.sort=t.dataset.sort;return}
+  if(t.dataset.f){S.filt[t.dataset.f]=t.dataset.v;document.querySelectorAll(`[data-f="${t.dataset.f}"]`).forEach(b=>b.setAttribute("aria-pressed",b===t));renderResults();return}
+  if(t.dataset.view){const v=+t.dataset.view,g=document.querySelector("#gMain svg.art");g.classList.remove("view-1","view-2");if(v)g.classList.add("view-"+v);document.querySelectorAll(".thumb").forEach(b=>b.setAttribute("aria-pressed",b===t));return}
+  if(t.dataset.jump){e.preventDefault();document.getElementById("g-"+t.dataset.jump).scrollIntoView({behavior:"smooth"});return}
+  if(t.id==="resetF"){S.filt={cat:"Tous",room:"Toutes",max:300,sort:S.filt.sort};route();return}
+  if(t.id==="fToggle"){const f=document.getElementById("filters");f.classList.toggle("open");t.setAttribute("aria-expanded",f.classList.contains("open"));return}
+  if(t.id==="zipBtn"){checkZip(document.getElementById("zip").value,document.getElementById("zipRes"));return}
+  if(t.id==="goShop"){closeCart();return}
+  if(t.id==="toPay"){readCo();const err=document.getElementById("coErr");const c=S.co;
+    if(!c.name||!c.tel||!mailOk(c.mail)){err.textContent="Indiquez votre nom, votre téléphone et un e-mail valide.";return}
+    if(c.mode==="livraison"){if(!c.addr){err.textContent="Indiquez votre adresse de livraison.";return}if(!checkZip(c.zip,document.getElementById("coZip"))){err.textContent="Ce code postal n'est pas livré. Choisissez le retrait en magasin ou un autre code postal.";return}}
+    S.step=2;renderCart();return}
+  if(t.id==="payBtn"){t.disabled=true;t.textContent="Paiement en cours…";setTimeout(()=>{S.co.num="SP-"+Math.floor(10000+Math.random()*89999);S.co.kg=totals().kg;S.sold=[...new Set([...S.sold,...S.cart])];S.cart=[];save();updCount();S.step=3;renderCart();route()},1100);return}
+  if(t.id==="doneBtn"){closeCart();location.hash="#boutique";return}
+});
+document.addEventListener("change",e=>{
+  if(e.target.name==="mode"){readCo();S.co.mode=e.target.value;renderCart()}
+  if(e.target.id==="sort"){S.filt.sort=e.target.value;renderResults()}
+  if(e.target.id==="s-photos")addPhotos(e.target.files);
+});
+document.addEventListener("input",e=>{
+  if(e.target.id==="maxPrice"){S.filt.max=+e.target.value;document.getElementById("maxVal").textContent=S.filt.max>=300?"Tous les prix":"Jusqu'à "+eur(S.filt.max);renderResults()}
+  if(e.target.id==="co-zip"&&e.target.value.length===5)checkZip(e.target.value,document.getElementById("coZip"));
+});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&drawer.classList.contains("open"))closeCart();if(e.key==="Enter"&&e.target.id==="zip")checkZip(e.target.value,document.getElementById("zipRes"))});
+document.getElementById("cartBtn").onclick=()=>openCart(0);
+document.getElementById("drClose").onclick=closeCart;overlay.onclick=closeCart;
+document.getElementById("menuBtn").onclick=function(){const n=document.getElementById("mainNav");n.classList.toggle("open");this.setAttribute("aria-expanded",n.classList.contains("open"))};
+
+/* photos du formulaire de rachat */
+let photos=[];
+function addPhotos(files){[...files].filter(f=>f.type.startsWith("image/")).slice(0,6-photos.length).forEach(f=>{const r=new FileReader();r.onload=()=>{photos.push(r.result);drawPhotos()};r.readAsDataURL(f)})}
+function drawPhotos(){const el=document.getElementById("previews");if(!el)return;el.innerHTML=photos.map((src,i)=>`<figure><img src="${src}" alt="Photo ${i+1}"><button type="button" data-ph="${i}" aria-label="Retirer la photo ${i+1}">×</button></figure>`).join("")}
+document.addEventListener("click",e=>{const b=e.target.closest("[data-ph]");if(b){photos.splice(+b.dataset.ph,1);drawPhotos()}});
+["dragover","dragenter"].forEach(ev=>document.addEventListener(ev,e=>{const d=e.target.closest&&e.target.closest("#drop");if(d){e.preventDefault();d.classList.add("over")}}));
+document.addEventListener("dragleave",e=>{const d=e.target.closest&&e.target.closest("#drop");if(d)d.classList.remove("over")});
+document.addEventListener("drop",e=>{const d=e.target.closest&&e.target.closest("#drop");if(d){e.preventDefault();d.classList.remove("over");addPhotos(e.dataTransfer.files)}});
+
+/* formulaires */
+document.addEventListener("submit",e=>{
+  e.preventDefault();const f=e.target,v=id=>(document.getElementById(id)||{}).value?.trim()||"";
+  if(f.id==="newsForm"){const m=v("newsMail"),o=document.getElementById("newsMsg");o.textContent=mailOk(m)?"C'est noté ! Premier e-mail vendredi (démo : rien n'est envoyé).":"Entrez une adresse e-mail valide.";if(mailOk(m))f.reset();return}
+  if(f.id==="sellForm"){const err=document.getElementById("sellErr");
+    if(!v("s-cat")||!v("s-name")){err.textContent="Choisissez une catégorie et indiquez l'objet.";return}
+    if(!photos.length){err.textContent="Ajoutez au moins une photo pour qu'on puisse estimer l'objet.";return}
+    if(!v("s-first")||!/^\d{5}$/.test(v("s-zip"))||!mailOk(v("s-mail"))){err.textContent="Indiquez votre prénom, un code postal à 5 chiffres et un e-mail valide.";return}
+    if(!document.getElementById("s-ok").checked){err.textContent="Cochez la case de consentement pour envoyer la demande.";return}
+    const name=v("s-name"),first=v("s-first"),n=photos.length;photos=[];
+    document.getElementById("sellBox").innerHTML=`<div class="success">${ICON.check}<h3>Merci ${esc(first)} !</h3><p>Votre demande pour « ${esc(name)} » avec ${n} photo${n>1?"s":""} est prête. On vous répond sous 48 h avec une offre.</p><p class="note-demo" style="margin-top:12px">Démonstration : la demande n'est pas réellement envoyée.</p><a class="btn btn-ghost" style="margin-top:18px" href="#boutique">Voir la boutique</a></div>`;return}
+  if(f.id==="revForm"){const err=document.getElementById("rvErr");if(!v("rv-name")||v("rv-text").length<10){err.textContent="Indiquez votre prénom et un avis d'au moins 10 caractères.";return}
+    S.reviews.unshift({n:v("rv-name"),q:v("rv-q")||"Montpellier",s:+document.querySelector("[name=rv]:checked").value,t:v("rv-text")});route();toast("Merci pour votre avis !");return}
+  if(f.id==="ctForm"){const err=document.getElementById("ctErr");if(!v("c-name")||!mailOk(v("c-mail"))||!v("c-msg")){err.textContent="Indiquez votre nom, un e-mail valide et votre message.";return}
+    document.getElementById("ctBox").innerHTML=`<div class="success">${ICON.check}<h3>Message bien reçu</h3><p>On vous répond sous 24 h ouvrées.</p><p class="note-demo" style="margin-top:12px">Démonstration : le message n'est pas réellement envoyé.</p></div>`;return}
+});
+
+/* instagram */
+const IG=[1,16,15,2,13,9].map(byId);
+document.getElementById("insta").innerHTML=IG.map(p=>`<a href="#produit-${p.id}" style="--tint:${catOf(p.cat).tint}" aria-label="${p.name}">${art(p.kind,p.color)}</a>`).join("");
+
+updCount();route();
+})();
+</script>
+</body>
+</html>
